@@ -1,11 +1,13 @@
 package com.example.demo.controllers;
 
 
+import com.example.demo.models.modeloJugador;
 import com.example.demo.services.FuncionalidadeServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 public class FuncionalidadesController {
@@ -30,6 +32,21 @@ FuncionalidadeServices FuncionalidadeServices;
     public String traducir(@PathVariable String palabra){
        String traducido = FuncionalidadeServices.traducir(palabra);
        return traducido;
+    }
+
+    @PostMapping("/guarda")
+    public String insertaJugador(@RequestParam Map<String, String> body) {
+       modeloJugador jugador = new modeloJugador();
+        jugador.setNombre(body.get("nombre"));
+        jugador.setEquipo(body.get("equipo"));
+        jugador.setGoles(Integer.parseInt(body.get("goles")));
+        FuncionalidadeServices.guardarJugador(jugador);
+        return "he guardado los datos del jugador";
+    }
+
+    @GetMapping("/listar")
+    public String listarJugadores(){
+       return FuncionalidadeServices.listarJugadores().toString();
     }
 
 }

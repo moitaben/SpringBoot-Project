@@ -1,8 +1,12 @@
 package com.example.demo.services;
 
+import com.example.demo.repositories.JugadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import com.example.demo.models.modeloJugador;
+import com.example.demo.repositories.JugadorRepository;
+import java.util.ArrayList;
 
 
 class ResponseData {
@@ -16,12 +20,14 @@ class Traducido {
 
 @Service
 public class FuncionalidadeServices {
-
+    @Autowired
+    JugadorRepository  jugadorRepository;
     @Autowired
     RestTemplate restTemplate;
 
 
-    private static boolean esConsonante(char letra) {
+
+    private boolean esConsonante(char letra) {
         return "bcdfghjklmnñpqrstvwxyz".contains(String.valueOf(letra).toLowerCase());
     }
 
@@ -58,7 +64,19 @@ public class FuncionalidadeServices {
         Traducido json = restTemplate.getForObject(url, Traducido.class);
         return json.responseData.translatedText;
     }
+
+    public ArrayList<modeloJugador> listarJugadores() {
+        return (ArrayList<modeloJugador>) jugadorRepository.findAll();
+    }
+
+    public modeloJugador guardarJugador(modeloJugador jugador) {
+        return jugadorRepository.save(jugador);
+    }
 }
+
+
+
+
 
 
 
