@@ -12,31 +12,31 @@ import java.util.Map;
 @RestController
 public class FuncionalidadesController {
 
-@Autowired
-FuncionalidadeServices FuncionalidadeServices;
+    @Autowired
+    FuncionalidadeServices FuncionalidadeServices;
 
 
     @GetMapping("/contar/{palabra}")
-    public String contarLetras(@PathVariable String palabra){
-      String total =   FuncionalidadeServices.contarLetras(palabra);
-      return total;
+    public String contarLetras(@PathVariable String palabra) {
+        String total = FuncionalidadeServices.contarLetras(palabra);
+        return total;
     }
 
     @GetMapping("/{palabra}")
-    public String consonantesMayusculas(@PathVariable String palabra){
-        String resultado= FuncionalidadeServices.consonantesMayusculas(palabra);
+    public String consonantesMayusculas(@PathVariable String palabra) {
+        String resultado = FuncionalidadeServices.consonantesMayusculas(palabra);
         return resultado;
     }
 
     @GetMapping("/traduce/{palabra}")
-    public String traducir(@PathVariable String palabra){
-       String traducido = FuncionalidadeServices.traducir(palabra);
-       return traducido;
+    public String traducir(@PathVariable String palabra) {
+        String traducido = FuncionalidadeServices.traducir(palabra);
+        return traducido;
     }
 
     @PostMapping("/guarda")
     public String insertaJugador(@RequestParam Map<String, String> body) {
-       modeloJugador jugador = new modeloJugador();
+        modeloJugador jugador = new modeloJugador();
         jugador.setNombre(body.get("nombre"));
         jugador.setEquipo(body.get("equipo"));
         jugador.setGoles(Integer.parseInt(body.get("goles")));
@@ -45,8 +45,14 @@ FuncionalidadeServices FuncionalidadeServices;
     }
 
     @GetMapping("/listar")
-    public String listarJugadores(){
-       return FuncionalidadeServices.listarJugadores().toString();
+    public String listarJugadores() {
+        return FuncionalidadeServices.listarJugadores().toString();
+    }
+
+
+    @RequestMapping("/guardarjugador")
+    public String formulario(Model modelo) {
+        return "GuardarDatos";
     }
 
 }
