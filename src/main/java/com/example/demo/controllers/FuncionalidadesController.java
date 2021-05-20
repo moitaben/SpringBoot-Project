@@ -49,10 +49,4 @@ public class FuncionalidadesController {
         return FuncionalidadeServices.listarJugadores().toString();
     }
 
-
-    @RequestMapping("/guardarjugador")
-    public String formulario(Model modelo) {
-        return "GuardarDatos";
-    }
-
 }
