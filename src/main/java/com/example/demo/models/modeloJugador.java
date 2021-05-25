@@ -9,7 +9,7 @@ public class modeloJugador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private Long id;
+    private int id;
 
     private String nombre;
 
@@ -21,11 +21,11 @@ public class modeloJugador {
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date fecha; // Si no pongo fecha, la fecha será la del sistema
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

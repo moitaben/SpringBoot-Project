@@ -19,7 +19,7 @@ class Traducido {
 
 
 @Service
-public class FuncionalidadeServices {
+public class funcionalidadeServices {
     @Autowired
     JugadorRepository  jugadorRepository;
     @Autowired
