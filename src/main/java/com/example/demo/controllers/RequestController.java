@@ -12,4 +12,11 @@ public class RequestController {
     public String formulario(Model model) {
         return "guardardatos";
     }
+@RequestMapping("/listar")
+  public String listarJugadores(Model model) {
+    ArrayList<modeloJugador> jugadores = funcionalidadeService.listarJugadores();
+    model.addAttribute("jugadores", jugadores);
+    return "listaJugadores";
+  }
+
 }
